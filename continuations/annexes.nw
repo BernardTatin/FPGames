@@ -1,13 +1,13 @@
 \part{annexes}
 
-\section{tables et index}
-\subsection{table des extraits de code}
+\part{tables et index}
+\section{table des extraits de code}
 
 \begin{multicols}{2}
 \nowebchunks
 \end{multicols}
 
-\subsection{index}
+\section{index}
 
 \begin{multicols}{2}
 \nowebindex

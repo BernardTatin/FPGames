@@ -13,7 +13,7 @@ avec d'autres langages dont \emph{Standard ML} ou \emph{F\#}. Le fil conducteur 
 indication contraire, des articles de \emph{Wikipedia} en anglais ou en français qui concernent
 ces continuations de la programmation fonctionnelle.\\
 \\
-Le choix de \texttt{noweb} provientd  du simple fait que documentation et sources sont conçus
+Le choix de \texttt{noweb} provient du simple fait que documentation et sources sont conçus
 en même temps.}
 
 \tableofcontents
