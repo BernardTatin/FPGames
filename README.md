@@ -1,2 +1,3 @@
 # FPGames
-F(unctional) P(rorgamming) Games
+
+F(unctional) P(rogramming) Games
