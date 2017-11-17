@@ -7,6 +7,7 @@
 \let\it\itshape
 \let\rm\rmfamily
 
+\usepackage[nodayofweek]{datetime}
 \usepackage{boolexpr,pdftexcmds,trace}
 \usepackage{multicol}
 
@@ -16,8 +17,9 @@
 \automark[section]{section}
 \cfoot[\pagemark]{\pagemark}
 %% for date/time
-\usepackage{scrdate}
-\usepackage{scrtime}
+% \usepackage{scrdate}
+% \usepackage{scrtime}
+
 
 %% package for noweb
 \usepackage{common/newnoweb}
@@ -25,10 +27,8 @@
 
 %% fonts and encoding
 \usepackage[T1]{fontenc}
-%\usepackage[default]{gillius}
 \usepackage[condensed,sfdefault]{universalis}
 \usepackage{CormorantGaramond}
-% \usepackage{quattrocento}
 \usepackage[zerostyle=d]{newtxtt}
 \renewcommand{\familydefault}{\rmdefault}
 
@@ -58,13 +58,16 @@
 }
 
 %% a better abstract (I hope...)
+% french date format
+\newdateformat{mydate}{\twodigit{\THEDAY}{/}\twodigit{\THEMONTH}{/}\THEYEAR}
+
 \renewenvironment{abstract}[1]{%
   \hfill
   \begin{minipage}
     {0.95\textwidth}
     \rule{\textwidth}{1pt}
     \footnotesize
-    #1\footnote{Document crée le \today à \thistime}
+    #1\footnote{Document crée le \mydate\today{} à \currenttime{}.}
     \normalsize
     {%
       \par\noindent
@@ -73,11 +76,6 @@
   \end{minipage}
   \clearpage
 }
-%% format des paragraphes
-%% \setlength{\parindent}{0cm}
-%% \setlength{\parskip}{4mm}
-%% \linespread{1.1}
-%% \let\nwdocspar=\smallbreak
 
 %% better itemize
 \newenvironment{packed_itemize}{
@@ -97,11 +95,6 @@
 \newcommand{\addtocontenttable}[4]{%
   \refstepcounter{#1}%
   \addcontentsline{toc}{#1}{#2\hspace{#3}#4}%
-  % pour les entêtes de page
-  % \markboth{}{}%
-  % \reset@font
-  % \parindent \z@
-  % \vspace*{10\p@}%
 }
 
 %% for vbox, see https://tex.stackexchange.com/questions/83930/what-are-the-different-kinds-of-boxes-in-latex
@@ -126,26 +119,6 @@
 } %% \def\@part
 \makeatother
 
-\makeatletter
-\def\@section[#1]#2{%
-% \newcommand{\section}[2]{%
-  \cleardoublepage
-  \addtocontenttable{section}{\thesection}{3em}{#1}
-  \mbox{%
-    \begin{minipage}{7mm}
-      \begin{tabular}{@{}p{7mm}@{}}
-        \makebox[7mm]{\cellcolor{orange}\Large\color{white}\bfseries\strut\thesection{}\rule[-4cm]{0pt}{4cm}}%
-      \end{tabular}%
-    \end{minipage}
-    \kern-2pt
-    \begin{minipage}{170mm}
-       \tabular[t]{@{}p{1cm}p{\dimexpr\hsize-2.1cm}@{}}\hline
-          & \Large\bfseries\itshape\rule{0pt}{1.5\ht\strutbox}#1\endtabular
-    \end{minipage}
-    } %% mbox
-%  \vskip 100\p@
-} %% \def\@section
-\makeatother
 
 \makeatletter
 \long\def\isequal#1#2{\pdf@strcmp{#1}{#2}}
