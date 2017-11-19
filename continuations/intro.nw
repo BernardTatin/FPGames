@@ -1,0 +1,18 @@
+\part{introduction}
+\begin{note}{Note}
+Ce qui suit provient pour l'essentiel de l'article de Wikipedia (en anglais): \href{https://en.wikipedia.org/wiki/Continuation-passing_style}{Continuation-passing style}.
+\end{note}
+
+\section{un premier test et quelques définitions}
+Commençons donc par les définitions essentielles:
+
+\begin{termdefinition}{CPS}
+Le \emph{continuation-passing style} ou \textbf{CPS} est un style de programmation où le contrôle est passé explicitement sous forme de continuation.
+\end{termdefinition}
+
+C'est ce style que nous allons présenter dans les pages qui suivent. En attendant, voyons ce qu'est une continuation :
+
+\begin{termdefinition}{continuation}
+Une continuation d'un programme est \emph{la suite des instructions qu'il lui reste à exécuter à un moment précis}\footnote{\emph{Cf.}
+\href{https://fr.wikipedia.org/wiki/Continuation}{Continuation}.}
+\end{termdefinition}

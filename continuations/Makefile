@@ -6,13 +6,13 @@ PDFLATEX = pdflatex
 
 PROJECT = continuations
 
-TARG_SRC = include/common-bash.bash
+TARG_SRC = intro.scm
 TARG_PDF = $(PROJECT).pdf
 
 TEX_DEPS = common/newnoweb.sty common/prelude.tex
 
 SRC = $(PROJECT).nw
-MORENW = annexes.nw
+MORENW = intro.nw annexes.nw
 ALLNW = $(SRC) $(MORENW)
 _tmpnw = _noweb.nw
 
@@ -27,7 +27,7 @@ pdf: $(TARG_PDF)
 $(filter %.sh,$(TARG_SRC)): %.sh: $(ALLNW)
 	$(TANGLE) -R$(shell basename $@) $(ALLNW) > $@
 
-$(filter %.bash,$(TARG_SRC)): %.bash: $(ALLNW)
+$(filter %.scm,$(TARG_SRC)): %.scm: $(ALLNW)
 	$(TANGLE) -R$(shell basename $@) $(ALLNW) > $@
 
 .PRECIOUS: $(PROJECT).tex

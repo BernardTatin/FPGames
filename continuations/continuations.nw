@@ -4,11 +4,17 @@
 
 \author{Bernard Tatin}
 \date{2017}
-\title{Le titre}
+\title{À propos des continuations}
 \begin{document}
 
 \maketitle
-\abstract{Le choix de \texttt{noweb} provient du simple fait que documentation et sources sont conçus en même temps.}
+\abstract{Ici, on s'occupe des continuations tout d'abord avec \emph{Scheme} puis, si possible,
+avec d'autres langages dont \emph{Standard ML} ou \emph{F\#}. Le fil conducteur provient, sauf
+indication contraire, des articles de \emph{Wikipedia} en anglais ou en français qui concernent
+ces continuations de la programmation fonctionnelle.\\
+\\
+Le choix de \texttt{noweb} provient du simple fait que documentation et sources sont conçus
+en même temps.}
 
 \tableofcontents
 

@@ -6,24 +6,48 @@
 
 \author{Bernard Tatin}
 \date{2017}
-\title{Le titre}
+\title{À propos des continuations}
 \begin{document}
 
 \maketitle
-\abstract{Le choix de \texttt{noweb} provient du simple fait que documentation et sources sont conçus en même temps.}
+\abstract{Ici, on s'occupe des continuations tout d'abord avec \emph{Scheme} puis, si possible,
+avec d'autres langages dont \emph{Standard ML} ou \emph{F\#}. Le fil conducteur provient, sauf
+indication contraire, des articles de \emph{Wikipedia} en anglais ou en français qui concernent
+ces continuations de la programmation fonctionnelle.\\
+\\
+Le choix de \texttt{noweb} provient du simple fait que documentation et sources sont conçus
+en même temps.}
 
 \tableofcontents
 
+\part{introduction}
+\begin{note}{Note}
+Ce qui suit provient pour l'essentiel de l'article de Wikipedia (en anglais): \href{https://en.wikipedia.org/wiki/Continuation-passing_style}{Continuation-passing style}.
+\end{note}
+
+\section{un premier test et quelques définitions}
+Commençons donc par les définitions essentielles:
+
+\begin{termdefinition}{CPS}
+Le \emph{continuation-passing style} ou \textbf{CPS} est un style de programmation où le contrôle est passé explicitement sous forme de continuation.
+\end{termdefinition}
+
+C'est ce style que nous allons présenter dans les pages qui suivent. En attendant, voyons ce qu'est une continuation :
+
+\begin{termdefinition}{continuation}
+Une continuation d'un programme est \emph{la suite des instructions qu'il lui reste à exécuter à un moment précis}\footnote{\emph{Cf.}
+\href{https://fr.wikipedia.org/wiki/Continuation}{Continuation}.}
+\end{termdefinition}
 \part{annexes}
 
-\section{tables et index}
-\subsection{table des extraits de code}
+\part{tables et index}
+\section{table des extraits de code}
 
 \begin{multicols}{2}
 \nowebchunks
 \end{multicols}
 
-\subsection{index}
+\section{index des symboles}
 
 \begin{multicols}{2}
 \nowebindex
