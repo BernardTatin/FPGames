@@ -57,40 +57,12 @@
   linktocpage
 }
 
-%% a better abstract (I hope...)
-% french date format
-\newdateformat{mydate}{\twodigit{\THEDAY}{/}\twodigit{\THEMONTH}{/}\THEYEAR}
-
-\renewenvironment{abstract}[1]{%
-  \hfill
-  \begin{minipage}
-    {0.95\textwidth}
-    \rule{\textwidth}{1pt}
-    \footnotesize
-    #1\footnote{Document crée le \mydate\today{} à \currenttime{}.}
-    \normalsize
-    {%
-      \par\noindent
-      \rule{\textwidth}{1pt}
-    }
-  \end{minipage}
-  \clearpage
-}
-
-%% better itemize
-\newenvironment{packed_itemize}{
-\begin{itemize}
-  \setlength{\itemsep}{0pt}
-  \setlength{\parskip}{0pt}
-  \setlength{\parsep}{0pt}
-}{\end{itemize}}
-
-\renewcommand{\thesection}{\thepart.\arabic{section}}
-% from : https://tex.stackexchange.com/questions/245979/numberwithinequationsubsection-fails-for-subsections-0
 % reset section counter at each part
 \makeatletter
 \@addtoreset{section}{part}
 \makeatother
+\renewcommand{\thesection}{\thepart.\arabic{section}}
+% from : https://tex.stackexchange.com/questions/245979/numberwithinequationsubsection-fails-for-subsections-0
 %% from https://tex.stackexchange.com/questions/192838/part-heading-style?rq=1
 \newcommand{\addtocontenttable}[4]{%
   \refstepcounter{#1}%
@@ -190,3 +162,5 @@
             \vspace*{4pt}%Space after
         \end{minipage}%
     }}
+
+\input{common/environments}
