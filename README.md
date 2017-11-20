@@ -14,8 +14,8 @@ $ git remote add rlatex-common git@github.com:BernardTatin/latex-common.git
 # verify
 $ git remote -v
 ...
-rlatex-common	git@github.com:BernardTatin/latex-common.git (fetch)
-rlatex-common	git@github.com:BernardTatin/latex-common.git (push)
+rlatex-common git@github.com:BernardTatin/latex-common.git (fetch)
+rlatex-common git@github.com:BernardTatin/latex-common.git (push)
 ...
 $ git subtree add --prefix=latex-common/ rlatex-common master
 git fetch rlatex-common master
