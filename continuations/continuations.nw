@@ -1,4 +1,4 @@
-\documentclass{scrartcl}
+\documentclass[A4,12pt]{scrartcl}
 
 \input{common/prelude.tex}
 
