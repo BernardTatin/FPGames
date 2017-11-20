@@ -1,6 +1,10 @@
 # latex-common
 
-Common files for my LaTeX projects. Must be used as a [*LaTeX subtree*](https://www.atlassian.com/blog/git/alternatives-to-git-submodule-git-subtree).
+These common files for my LaTeX projects can be used as a [*LaTeX subtree*](https://www.atlassian.com/blog/git/alternatives-to-git-submodule-git-subtree). You also have complete [git subtrees tutorial](https://medium.com/@v/git-subtrees-a-tutorial-6ff568381844).
+
+You can use it as a more classical submodule.
+
+## using it as a subtree
 
 To use it, follow these commands :
 
