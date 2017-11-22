@@ -1,4 +1,12 @@
 \part{introduction}
+
+Belle image.
+
+% \nicepicture{small-loire.png}{la loire}{photo personnelle}{r}
+\rawpicture{small-loire.png}{la loire}{photo de l'auteur}{r}
+
+On ne s'en lasse pas.
+
 \begin{note}{Note}
 Ce qui suit provient pour l'essentiel de l'article de Wikipedia (en anglais): \href{https://en.wikipedia.org/wiki/Continuation-passing_style}{Continuation-passing style}.
 \end{note}
