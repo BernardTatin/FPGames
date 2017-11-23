@@ -6,13 +6,13 @@ PDFLATEX = pdflatex
 
 PROJECT = continuations
 
-TARG_SRC = intro.scm
+TARG_SRC = first-cps-test.scm
 TARG_PDF = $(PROJECT).pdf
 
 TEX_DEPS = common/newnoweb.sty common/prelude.tex
 
 SRC = $(PROJECT).nw
-MORENW = intro.nw annexes.nw
+MORENW = intro.nw annexes.nw nw/tables.nw
 ALLNW = $(SRC) $(MORENW)
 _tmpnw = _noweb.nw
 
