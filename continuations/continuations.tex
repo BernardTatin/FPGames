@@ -20,12 +20,7 @@ en même temps.}
 
 \part{introduction}
 
-Belle image.
-
-% \nicepicture{small-loire.png}{la loire}{photo personnelle}{r}
-\rawpicture{small-loire.png}{la loire}{photo de l'auteur}{r}
-
-On ne s'en lasse pas.
+\rawpicture{small-loire.png}{la Loire, métaphore de la continuation?}{photo de l'auteur}{r}
 
 \begin{note}{Note}
 Ce qui suit provient pour l'essentiel de l'article de Wikipedia (en anglais): \href{https://en.wikipedia.org/wiki/Continuation-passing_style}{Continuation-passing style}.
@@ -91,12 +86,22 @@ Testons:
 (test 0 3)
 (test 3 0)
 \nwnotused{first-cps-test.scm}\nwidentuses{\\{{\nwixident{distance}}{distance}}\\{{\nwixident{distance-cps}}{distance-cps}}\\{{\nwixident{myprint}}{myprint}}}\nwindexuse{\nwixident{distance}}{distance}{NW48t7P8-3l3wO2-1}\nwindexuse{\nwixident{distance-cps}}{distance-cps}{NW48t7P8-3l3wO2-1}\nwindexuse{\nwixident{myprint}}{myprint}{NW48t7P8-3l3wO2-1}\nwendcode{}\nwbegindocs{8}\nwdocspar
+Ce code doit nous renvoyer ce résultat:
+\nwenddocs{}\nwbegincode{9}\sublabel{NW48t7P8-3b3EwE-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW48t7P8-3b3EwE-1}}}\moddef{resultat first cps test~{\nwtagstyle{}\subpageref{NW48t7P8-3b3EwE-1}}}\endmoddef\nwstartdeflinemarkup\nwenddeflinemarkup
+$ gosh first-cps-test.scm
+x=3 y=4 direct=5 cps=5
+x=0 y=3 direct=3 cps=3
+x=3 y=0 direct=3 cps=3
+\nwnotused{resultat first cps test}\nwendcode{}\nwbegindocs{10}\nwdocspar
+
+\section{du code plus intéressant}
+Notre continuation un peu simpliste permet de mieux appréhender l'essentiel du problème. Voyons ce qui peut-être plus constructif et utile comme les échappements.
 \part{annexes}
 \section{fonctions utiles}
 
 \subsection{affichage console}
 Voici un \texttt{display} plus \emph{fun}:
-\nwenddocs{}\nwbegincode{9}\sublabel{NW48t7P8-9KoSl-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW48t7P8-9KoSl-1}}}\moddef{tools for scheme~{\nwtagstyle{}\subpageref{NW48t7P8-9KoSl-1}}}\endmoddef\nwstartdeflinemarkup\nwusesondefline{\\{NW48t7P8-3l3wO2-1}}\nwenddeflinemarkup
+\nwenddocs{}\nwbegincode{11}\sublabel{NW48t7P8-9KoSl-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW48t7P8-9KoSl-1}}}\moddef{tools for scheme~{\nwtagstyle{}\subpageref{NW48t7P8-9KoSl-1}}}\endmoddef\nwstartdeflinemarkup\nwusesondefline{\\{NW48t7P8-3l3wO2-1}}\nwenddeflinemarkup
 (define (\nwlinkedidentc{myprint}{NW48t7P8-9KoSl-1} . l)
   (for-each (lambda(e) (display e)) l))
 \nwindexdefn{\nwixident{myprint}}{myprint}{NW48t7P8-9KoSl-1}\eatline
@@ -106,6 +111,7 @@ Voici un \texttt{display} plus \emph{fun}:
 \nwixlogsorted{c}{{distance CPS}{NW48t7P8-5trcp-1}{\nwixd{NW48t7P8-5trcp-1}\nwixu{NW48t7P8-3l3wO2-1}}}%
 \nwixlogsorted{c}{{distance direct style}{NW48t7P8-1q4Jku-1}{\nwixd{NW48t7P8-1q4Jku-1}\nwixu{NW48t7P8-3l3wO2-1}}}%
 \nwixlogsorted{c}{{first-cps-test.scm}{NW48t7P8-3l3wO2-1}{\nwixd{NW48t7P8-3l3wO2-1}}}%
+\nwixlogsorted{c}{{resultat first cps test}{NW48t7P8-3b3EwE-1}{\nwixd{NW48t7P8-3b3EwE-1}}}%
 \nwixlogsorted{c}{{tools for scheme}{NW48t7P8-9KoSl-1}{\nwixu{NW48t7P8-3l3wO2-1}\nwixd{NW48t7P8-9KoSl-1}}}%
 \nwixlogsorted{i}{{\nwixident{*-cps,}}{*-cps:com}}%
 \nwixlogsorted{i}{{\nwixident{+-cps,}}{+-cps:com}}%
@@ -114,7 +120,7 @@ Voici un \texttt{display} plus \emph{fun}:
 \nwixlogsorted{i}{{\nwixident{distance-cps}}{distance-cps}}%
 \nwixlogsorted{i}{{\nwixident{myprint}}{myprint}}%
 \nwixlogsorted{i}{{\nwixident{sqrt-cps}}{sqrt-cps}}%
-\nwbegindocs{10}\nwdocspar
+\nwbegindocs{12}\nwdocspar
 
 \part{tables et index}
 \section{table des extraits de code}
