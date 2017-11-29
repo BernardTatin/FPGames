@@ -76,3 +76,53 @@ x=3 y=0 direct=3 cps=3
 
 \section{du code plus intéressant}
 Notre continuation un peu simpliste permet de mieux appréhender l'essentiel du problème. Voyons ce qui peut-être plus constructif et utile comme les échappements.
+
+Voici un exemple calculant le produit des éléments d'une liste en style direct:
+<<list product>>=
+(define direct-product-1
+  (lambda(L)
+    (if (null? L)
+      1
+      (* (car L) (direct-product-1 (cdr L))))))
+@ %def direct-product-1
+On peut raccourcir les calculs si $0$ est présent dans la liste:
+<<list product>>=
+(define direct-product-2
+  (lambda(L)
+    (cond
+      ((null? L) 1)
+      ((zero? (car L)) 0)
+      (else (* (car L) (direct-product-2 (cdr L)))))))
+@ %def direct-product-2
+Maintenant, passons en CPS\footnote{La démonstration dans le Chazarain}:
+<<list product>>=
+(define cps-product
+  (lambda(L k)
+    (cond
+      ((null? L) (k 1))
+      ((zero? (car L)) (k 0))
+      (else (cps-product (cdr L) (lambda(p-cdr) (k (* p-cdr (car L))))))
+      )
+  ))
+@ %def cps-product
+
+L'utilisation de \texttt{cps-product} est en fait simple, il suffit d'utiliser la fonction identité:
+<<list product test>>=
+(cps-product '(12 6 0 35 42) (lambda(n) n))
+@
+
+Pour les continuations vérifiant:
+\begin{equation}
+   k(0) = 0
+\end{equation}
+on peut définir un \texttt{cps-product-0}:
+<<list product>>=
+(define cps-product-0
+  (lambda(L k)
+    (cond
+      ((null? L) (k 1))
+      ((zero? (car L)) 0)
+      (else (cps-product-0 (cdr L) (lambda(p-cdr) (k (* p-cdr (car L))))))
+      )
+  ))
+@ %def cps-product-0

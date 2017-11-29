@@ -96,12 +96,62 @@ x=3 y=0 direct=3 cps=3
 
 \section{du code plus intéressant}
 Notre continuation un peu simpliste permet de mieux appréhender l'essentiel du problème. Voyons ce qui peut-être plus constructif et utile comme les échappements.
-\part{annexes}
+
+Voici un exemple calculant le produit des éléments d'une liste en style direct:
+\nwenddocs{}\nwbegincode{11}\sublabel{NW48t7P8-23tY8l-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW48t7P8-23tY8l-1}}}\moddef{list product~{\nwtagstyle{}\subpageref{NW48t7P8-23tY8l-1}}}\endmoddef\nwstartdeflinemarkup\nwprevnextdefs{\relax}{NW48t7P8-23tY8l-2}\nwenddeflinemarkup
+(define \nwlinkedidentc{direct-product-1}{NW48t7P8-23tY8l-1}
+  (lambda(L)
+    (if (null? L)
+      1
+      (* (car L) (\nwlinkedidentc{direct-product-1}{NW48t7P8-23tY8l-1} (cdr L))))))
+\nwindexdefn{\nwixident{direct-product-1}}{direct-product-1}{NW48t7P8-23tY8l-1}\eatline
+\nwalsodefined{\\{NW48t7P8-23tY8l-2}\\{NW48t7P8-23tY8l-3}\\{NW48t7P8-23tY8l-4}}\nwnotused{list product}\nwidentdefs{\\{{\nwixident{direct-product-1}}{direct-product-1}}}\nwendcode{}\nwbegindocs{12}On peut raccourcir les calculs si $0$ est présent dans la liste:
+\nwenddocs{}\nwbegincode{13}\sublabel{NW48t7P8-23tY8l-2}\nwmargintag{{\nwtagstyle{}\subpageref{NW48t7P8-23tY8l-2}}}\moddef{list product~{\nwtagstyle{}\subpageref{NW48t7P8-23tY8l-1}}}\plusendmoddef\nwstartdeflinemarkup\nwprevnextdefs{NW48t7P8-23tY8l-1}{NW48t7P8-23tY8l-3}\nwenddeflinemarkup
+(define \nwlinkedidentc{direct-product-2}{NW48t7P8-23tY8l-2}
+  (lambda(L)
+    (cond
+      ((null? L) 1)
+      ((zero? (car L)) 0)
+      (else (* (car L) (\nwlinkedidentc{direct-product-2}{NW48t7P8-23tY8l-2} (cdr L)))))))
+\nwindexdefn{\nwixident{direct-product-2}}{direct-product-2}{NW48t7P8-23tY8l-2}\eatline
+\nwidentdefs{\\{{\nwixident{direct-product-2}}{direct-product-2}}}\nwendcode{}\nwbegindocs{14}Maintenant, passons en CPS\footnote{La démonstration dans le Chazarain}:
+\nwenddocs{}\nwbegincode{15}\sublabel{NW48t7P8-23tY8l-3}\nwmargintag{{\nwtagstyle{}\subpageref{NW48t7P8-23tY8l-3}}}\moddef{list product~{\nwtagstyle{}\subpageref{NW48t7P8-23tY8l-1}}}\plusendmoddef\nwstartdeflinemarkup\nwprevnextdefs{NW48t7P8-23tY8l-2}{NW48t7P8-23tY8l-4}\nwenddeflinemarkup
+(define \nwlinkedidentc{cps-product}{NW48t7P8-23tY8l-3}
+  (lambda(L k)
+    (cond
+      ((null? L) (k 1))
+      ((zero? (car L)) (k 0))
+      (else (\nwlinkedidentc{cps-product}{NW48t7P8-23tY8l-3} (cdr L) (lambda(p-cdr) (k (* p-cdr (car L))))))
+      )
+  ))
+\nwindexdefn{\nwixident{cps-product}}{cps-product}{NW48t7P8-23tY8l-3}\eatline
+\nwidentdefs{\\{{\nwixident{cps-product}}{cps-product}}}\nwendcode{}\nwbegindocs{16}\nwdocspar
+L'utilisation de \texttt{cps-product} est en fait simple, il suffit d'utiliser la fonction identité:
+\nwenddocs{}\nwbegincode{17}\sublabel{NW48t7P8-16ZUSX-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW48t7P8-16ZUSX-1}}}\moddef{list product test~{\nwtagstyle{}\subpageref{NW48t7P8-16ZUSX-1}}}\endmoddef\nwstartdeflinemarkup\nwenddeflinemarkup
+(\nwlinkedidentc{cps-product}{NW48t7P8-23tY8l-3} '(12 6 0 35 42) (lambda(n) n))
+\nwnotused{list product test}\nwidentuses{\\{{\nwixident{cps-product}}{cps-product}}}\nwindexuse{\nwixident{cps-product}}{cps-product}{NW48t7P8-16ZUSX-1}\nwendcode{}\nwbegindocs{18}\nwdocspar
+
+Pour les continuations vérifiant:
+\begin{equation}
+   k(0) = 0
+\end{equation}
+on peut définir un \texttt{cps-product-0}:
+\nwenddocs{}\nwbegincode{19}\sublabel{NW48t7P8-23tY8l-4}\nwmargintag{{\nwtagstyle{}\subpageref{NW48t7P8-23tY8l-4}}}\moddef{list product~{\nwtagstyle{}\subpageref{NW48t7P8-23tY8l-1}}}\plusendmoddef\nwstartdeflinemarkup\nwprevnextdefs{NW48t7P8-23tY8l-3}{\relax}\nwenddeflinemarkup
+(define \nwlinkedidentc{cps-product}{NW48t7P8-23tY8l-3}\nwlinkedidentc{-0}{NW48t7P8-23tY8l-4}
+  (lambda(L k)
+    (cond
+      ((null? L) (k 1))
+      ((zero? (car L)) 0)
+      (else (\nwlinkedidentc{cps-product}{NW48t7P8-23tY8l-3}\nwlinkedidentc{-0}{NW48t7P8-23tY8l-4} (cdr L) (lambda(p-cdr) (k (* p-cdr (car L))))))
+      )
+  ))
+\nwindexdefn{\nwixident{cps-product-0}}{cps-product-0}{NW48t7P8-23tY8l-4}\eatline
+\nwidentdefs{\\{{\nwixident{cps-product-0}}{cps-product-0}}}\nwidentuses{\\{{\nwixident{cps-product}}{cps-product}}}\nwindexuse{\nwixident{cps-product}}{cps-product}{NW48t7P8-23tY8l-4}\nwendcode{}\nwbegindocs{20}\part{annexes}
 \section{fonctions utiles}
 
 \subsection{affichage console}
 Voici un \texttt{display} plus \emph{fun}:
-\nwenddocs{}\nwbegincode{11}\sublabel{NW48t7P8-9KoSl-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW48t7P8-9KoSl-1}}}\moddef{tools for scheme~{\nwtagstyle{}\subpageref{NW48t7P8-9KoSl-1}}}\endmoddef\nwstartdeflinemarkup\nwusesondefline{\\{NW48t7P8-3l3wO2-1}}\nwenddeflinemarkup
+\nwenddocs{}\nwbegincode{21}\sublabel{NW48t7P8-9KoSl-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW48t7P8-9KoSl-1}}}\moddef{tools for scheme~{\nwtagstyle{}\subpageref{NW48t7P8-9KoSl-1}}}\endmoddef\nwstartdeflinemarkup\nwusesondefline{\\{NW48t7P8-3l3wO2-1}}\nwenddeflinemarkup
 (define (\nwlinkedidentc{myprint}{NW48t7P8-9KoSl-1} . l)
   (for-each (lambda(e) (display e)) l))
 \nwindexdefn{\nwixident{myprint}}{myprint}{NW48t7P8-9KoSl-1}\eatline
@@ -111,16 +161,22 @@ Voici un \texttt{display} plus \emph{fun}:
 \nwixlogsorted{c}{{distance CPS}{NW48t7P8-5trcp-1}{\nwixd{NW48t7P8-5trcp-1}\nwixu{NW48t7P8-3l3wO2-1}}}%
 \nwixlogsorted{c}{{distance direct style}{NW48t7P8-1q4Jku-1}{\nwixd{NW48t7P8-1q4Jku-1}\nwixu{NW48t7P8-3l3wO2-1}}}%
 \nwixlogsorted{c}{{first-cps-test.scm}{NW48t7P8-3l3wO2-1}{\nwixd{NW48t7P8-3l3wO2-1}}}%
+\nwixlogsorted{c}{{list product}{NW48t7P8-23tY8l-1}{\nwixd{NW48t7P8-23tY8l-1}\nwixd{NW48t7P8-23tY8l-2}\nwixd{NW48t7P8-23tY8l-3}\nwixd{NW48t7P8-23tY8l-4}}}%
+\nwixlogsorted{c}{{list product test}{NW48t7P8-16ZUSX-1}{\nwixd{NW48t7P8-16ZUSX-1}}}%
 \nwixlogsorted{c}{{resultat first cps test}{NW48t7P8-3b3EwE-1}{\nwixd{NW48t7P8-3b3EwE-1}}}%
 \nwixlogsorted{c}{{tools for scheme}{NW48t7P8-9KoSl-1}{\nwixu{NW48t7P8-3l3wO2-1}\nwixd{NW48t7P8-9KoSl-1}}}%
 \nwixlogsorted{i}{{\nwixident{*-cps,}}{*-cps:com}}%
 \nwixlogsorted{i}{{\nwixident{+-cps,}}{+-cps:com}}%
 \nwixlogsorted{i}{{\nwixident{cps-prim,}}{cps-prim:com}}%
+\nwixlogsorted{i}{{\nwixident{cps-product}}{cps-product}}%
+\nwixlogsorted{i}{{\nwixident{cps-product-0}}{cps-product-0}}%
+\nwixlogsorted{i}{{\nwixident{direct-product-1}}{direct-product-1}}%
+\nwixlogsorted{i}{{\nwixident{direct-product-2}}{direct-product-2}}%
 \nwixlogsorted{i}{{\nwixident{distance}}{distance}}%
 \nwixlogsorted{i}{{\nwixident{distance-cps}}{distance-cps}}%
 \nwixlogsorted{i}{{\nwixident{myprint}}{myprint}}%
 \nwixlogsorted{i}{{\nwixident{sqrt-cps}}{sqrt-cps}}%
-\nwbegindocs{12}\nwdocspar
+\nwbegindocs{22}\nwdocspar
 
 \part{tables et index}
 \section{table des extraits de code}
