@@ -24,3 +24,50 @@ C'est ce style que nous allons présenter dans les pages qui suivent. En attenda
 Une continuation d'un programme est \emph{la suite des instructions qu'il lui reste à exécuter à un moment précis}\footnote{\emph{Cf.}
 \href{https://fr.wikipedia.org/wiki/Continuation}{Continuation}.}
 \end{termdefinition}
+
+Voici un exemple montrant la différence entre le style direct:
+<<distance direct style>>=
+(define (distance x y)
+ (sqrt (+ (* x x) (* y y))))
+@ %def distance
+
+Et le CPS:
+<<distance CPS>>=
+(define (distance-cps x y k)
+ (*-cps x x (lambda (x2)
+          (*-cps y y (lambda (y2)
+                   (+-cps x2 y2 (lambda (x2py2)
+                              (sqrt-cps x2py2 k))))))))
+@ %def distance-cps
+
+Pour la définition des fonctions utilisées en CPS :
+<<cps function definition>>=
+(define (cps-prim f)
+ (lambda args
+  (let ((r (reverse args)))
+   ((car r) (apply f
+             (reverse (cdr r)))))))
+(define *-cps (cps-prim *))
+(define +-cps (cps-prim +))
+(define sqrt-cps (cps-prim sqrt))
+@ %def cps-prim, *-cps, +-cps, sqrt-cps
+
+Testons:
+<<first-cps-test.scm>>=
+;; first-cps-test
+
+<<tools for scheme>>
+<<cps function definition>>
+<<distance CPS>>
+<<distance direct style>>
+
+(define test
+  (lambda(x y)
+    (myprint "x=" x " y=" y)
+    (myprint " direct=" (distance x y))
+    (distance-cps x y (lambda(e) (myprint " cps=" e "\n")))))
+
+(test 3 4)
+(test 0 3)
+(test 3 0)
+@

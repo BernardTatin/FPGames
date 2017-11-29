@@ -1,6 +1,4 @@
-% ===> this file was generated automatically by noweave --- better not edit it
-
-\documentclass[A4,12pt]{scrartcl}
+\documentclass[A4,12pt]{scrartcl}% ===> this file was generated automatically by noweave --- better not edit it
 
 \input{common/prelude.tex}
 
@@ -46,7 +44,77 @@ C'est ce style que nous allons présenter dans les pages qui suivent. En attenda
 Une continuation d'un programme est \emph{la suite des instructions qu'il lui reste à exécuter à un moment précis}\footnote{\emph{Cf.}
 \href{https://fr.wikipedia.org/wiki/Continuation}{Continuation}.}
 \end{termdefinition}
+
+Voici un exemple montrant la différence entre le style direct:
+\nwfilename{_noweb.nw}\nwbegincode{1}\sublabel{NW48t7P8-1q4Jku-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW48t7P8-1q4Jku-1}}}\moddef{distance direct style~{\nwtagstyle{}\subpageref{NW48t7P8-1q4Jku-1}}}\endmoddef\nwstartdeflinemarkup\nwusesondefline{\\{NW48t7P8-3l3wO2-1}}\nwenddeflinemarkup
+(define (\nwlinkedidentc{distance}{NW48t7P8-1q4Jku-1} x y)
+ (sqrt (+ (* x x) (* y y))))
+\nwindexdefn{\nwixident{distance}}{distance}{NW48t7P8-1q4Jku-1}\eatline
+\nwused{\\{NW48t7P8-3l3wO2-1}}\nwidentdefs{\\{{\nwixident{distance}}{distance}}}\nwendcode{}\nwbegindocs{2}\nwdocspar
+Et le CPS:
+\nwenddocs{}\nwbegincode{3}\sublabel{NW48t7P8-5trcp-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW48t7P8-5trcp-1}}}\moddef{distance CPS~{\nwtagstyle{}\subpageref{NW48t7P8-5trcp-1}}}\endmoddef\nwstartdeflinemarkup\nwusesondefline{\\{NW48t7P8-3l3wO2-1}}\nwenddeflinemarkup
+(define (\nwlinkedidentc{distance}{NW48t7P8-1q4Jku-1}\nwlinkedidentc{-cps}{NW48t7P8-5trcp-1} x y k)
+ (*-cps x x (lambda (x2)
+          (*-cps y y (lambda (y2)
+                   (+-cps x2 y2 (lambda (x2py2)
+                              (\nwlinkedidentc{sqrt-cps}{NW48t7P8-3DjkoC-1} x2py2 k))))))))
+\nwindexdefn{\nwixident{distance-cps}}{distance-cps}{NW48t7P8-5trcp-1}\eatline
+\nwused{\\{NW48t7P8-3l3wO2-1}}\nwidentdefs{\\{{\nwixident{distance-cps}}{distance-cps}}}\nwidentuses{\\{{\nwixident{distance}}{distance}}\\{{\nwixident{sqrt-cps}}{sqrt-cps}}}\nwindexuse{\nwixident{distance}}{distance}{NW48t7P8-5trcp-1}\nwindexuse{\nwixident{sqrt-cps}}{sqrt-cps}{NW48t7P8-5trcp-1}\nwendcode{}\nwbegindocs{4}\nwdocspar
+Pour la définition des fonctions utilisées en CPS :
+\nwenddocs{}\nwbegincode{5}\sublabel{NW48t7P8-3DjkoC-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW48t7P8-3DjkoC-1}}}\moddef{cps function definition~{\nwtagstyle{}\subpageref{NW48t7P8-3DjkoC-1}}}\endmoddef\nwstartdeflinemarkup\nwusesondefline{\\{NW48t7P8-3l3wO2-1}}\nwenddeflinemarkup
+(define (cps-prim f)
+ (lambda args
+  (let ((r (reverse args)))
+   ((car r) (apply f
+             (reverse (cdr r)))))))
+(define *-cps (cps-prim *))
+(define +-cps (cps-prim +))
+(define \nwlinkedidentc{sqrt-cps}{NW48t7P8-3DjkoC-1} (cps-prim sqrt))
+\nwindexdefn{\nwixident{cps-prim,}}{cps-prim:com}{NW48t7P8-3DjkoC-1}\nwindexdefn{\nwixident{*-cps,}}{*-cps:com}{NW48t7P8-3DjkoC-1}\nwindexdefn{\nwixident{+-cps,}}{+-cps:com}{NW48t7P8-3DjkoC-1}\nwindexdefn{\nwixident{sqrt-cps}}{sqrt-cps}{NW48t7P8-3DjkoC-1}\eatline
+\nwused{\\{NW48t7P8-3l3wO2-1}}\nwidentdefs{\\{{\nwixident{*-cps,}}{*-cps:com}}\\{{\nwixident{+-cps,}}{+-cps:com}}\\{{\nwixident{cps-prim,}}{cps-prim:com}}\\{{\nwixident{sqrt-cps}}{sqrt-cps}}}\nwendcode{}\nwbegindocs{6}\nwdocspar
+Testons:
+\nwenddocs{}\nwbegincode{7}\sublabel{NW48t7P8-3l3wO2-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW48t7P8-3l3wO2-1}}}\moddef{first-cps-test.scm~{\nwtagstyle{}\subpageref{NW48t7P8-3l3wO2-1}}}\endmoddef\nwstartdeflinemarkup\nwenddeflinemarkup
+;; first-cps-test
+
+\LA{}tools for scheme~{\nwtagstyle{}\subpageref{NW48t7P8-9KoSl-1}}\RA{}
+\LA{}cps function definition~{\nwtagstyle{}\subpageref{NW48t7P8-3DjkoC-1}}\RA{}
+\LA{}distance CPS~{\nwtagstyle{}\subpageref{NW48t7P8-5trcp-1}}\RA{}
+\LA{}distance direct style~{\nwtagstyle{}\subpageref{NW48t7P8-1q4Jku-1}}\RA{}
+
+(define test
+  (lambda(x y)
+    (\nwlinkedidentc{myprint}{NW48t7P8-9KoSl-1} "x=" x " y=" y)
+    (\nwlinkedidentc{myprint}{NW48t7P8-9KoSl-1} " direct=" (\nwlinkedidentc{distance}{NW48t7P8-1q4Jku-1} x y))
+    (\nwlinkedidentc{distance}{NW48t7P8-1q4Jku-1}\nwlinkedidentc{-cps}{NW48t7P8-5trcp-1} x y (lambda(e) (\nwlinkedidentc{myprint}{NW48t7P8-9KoSl-1} " cps=" e "\\n")))))
+
+(test 3 4)
+(test 0 3)
+(test 3 0)
+\nwnotused{first-cps-test.scm}\nwidentuses{\\{{\nwixident{distance}}{distance}}\\{{\nwixident{distance-cps}}{distance-cps}}\\{{\nwixident{myprint}}{myprint}}}\nwindexuse{\nwixident{distance}}{distance}{NW48t7P8-3l3wO2-1}\nwindexuse{\nwixident{distance-cps}}{distance-cps}{NW48t7P8-3l3wO2-1}\nwindexuse{\nwixident{myprint}}{myprint}{NW48t7P8-3l3wO2-1}\nwendcode{}\nwbegindocs{8}\nwdocspar
 \part{annexes}
+\section{fonctions utiles}
+
+\subsection{affichage console}
+Voici un \texttt{display} plus \emph{fun}:
+\nwenddocs{}\nwbegincode{9}\sublabel{NW48t7P8-9KoSl-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW48t7P8-9KoSl-1}}}\moddef{tools for scheme~{\nwtagstyle{}\subpageref{NW48t7P8-9KoSl-1}}}\endmoddef\nwstartdeflinemarkup\nwusesondefline{\\{NW48t7P8-3l3wO2-1}}\nwenddeflinemarkup
+(define (\nwlinkedidentc{myprint}{NW48t7P8-9KoSl-1} . l)
+  (for-each (lambda(e) (display e)) l))
+\nwindexdefn{\nwixident{myprint}}{myprint}{NW48t7P8-9KoSl-1}\eatline
+\nwused{\\{NW48t7P8-3l3wO2-1}}\nwidentdefs{\\{{\nwixident{myprint}}{myprint}}}\nwendcode{}
+
+\nwixlogsorted{c}{{cps function definition}{NW48t7P8-3DjkoC-1}{\nwixd{NW48t7P8-3DjkoC-1}\nwixu{NW48t7P8-3l3wO2-1}}}%
+\nwixlogsorted{c}{{distance CPS}{NW48t7P8-5trcp-1}{\nwixd{NW48t7P8-5trcp-1}\nwixu{NW48t7P8-3l3wO2-1}}}%
+\nwixlogsorted{c}{{distance direct style}{NW48t7P8-1q4Jku-1}{\nwixd{NW48t7P8-1q4Jku-1}\nwixu{NW48t7P8-3l3wO2-1}}}%
+\nwixlogsorted{c}{{first-cps-test.scm}{NW48t7P8-3l3wO2-1}{\nwixd{NW48t7P8-3l3wO2-1}}}%
+\nwixlogsorted{c}{{tools for scheme}{NW48t7P8-9KoSl-1}{\nwixu{NW48t7P8-3l3wO2-1}\nwixd{NW48t7P8-9KoSl-1}}}%
+\nwixlogsorted{i}{{\nwixident{*-cps,}}{*-cps:com}}%
+\nwixlogsorted{i}{{\nwixident{+-cps,}}{+-cps:com}}%
+\nwixlogsorted{i}{{\nwixident{cps-prim,}}{cps-prim:com}}%
+\nwixlogsorted{i}{{\nwixident{distance}}{distance}}%
+\nwixlogsorted{i}{{\nwixident{distance-cps}}{distance-cps}}%
+\nwixlogsorted{i}{{\nwixident{myprint}}{myprint}}%
+\nwixlogsorted{i}{{\nwixident{sqrt-cps}}{sqrt-cps}}%
+\nwbegindocs{10}\nwdocspar
 
 \part{tables et index}
 \section{table des extraits de code}
@@ -64,4 +132,4 @@ Une continuation d'un programme est \emph{la suite des instructions qu'il lui re
 \listofdefinitions
 
 \end{document}
-\nwfilename{_noweb.nw}
+\nwenddocs{}

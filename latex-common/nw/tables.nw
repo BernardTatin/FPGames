@@ -1,0 +1,16 @@
+\part{tables et index}
+\section{table des extraits de code}
+
+\begin{multicols}{2}
+\nowebchunks
+\end{multicols}
+
+\section{index des symboles}
+
+\begin{multicols}{2}
+\nowebindex
+\end{multicols}
+
+\listofdefinitions
+
+\end{document}
