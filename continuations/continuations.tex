@@ -23,7 +23,7 @@ en même temps.}
 \rawpicture{small-loire.png}{la Loire, métaphore de la continuation?}{photo de l'auteur}{r}
 
 \begin{note}{Note}
-Ce qui suit provient pour l'essentiel de l'article de Wikipedia (en anglais): \href{https://en.wikipedia.org/wiki/Continuation-passing_style}{Continuation-passing style}.
+Ce qui suit provient pour l'essentiel de l'article de Wikipedia, \cite{wikienCPS} (en anglais): \href{https://en.wikipedia.org/wiki/Continuation-passing_style}{Continuation-passing style}.
 \end{note}
 
 \section{un premier test et quelques définitions}
@@ -37,7 +37,7 @@ C'est ce style que nous allons présenter dans les pages qui suivent. En attenda
 
 \begin{termdefinition}{continuation}
 Une continuation d'un programme est \emph{la suite des instructions qu'il lui reste à exécuter à un moment précis}\footnote{\emph{Cf.}
-\href{https://fr.wikipedia.org/wiki/Continuation}{Continuation}.}
+\cite{wikifrcontinuations}.}
 \end{termdefinition}
 
 Voici un exemple montrant la différence entre le style direct:
@@ -114,7 +114,7 @@ Voici un exemple calculant le produit des éléments d'une liste en style direct
       ((zero? (car L)) 0)
       (else (* (car L) (\nwlinkedidentc{direct-product-2}{NW48t7P8-23tY8l-2} (cdr L)))))))
 \nwindexdefn{\nwixident{direct-product-2}}{direct-product-2}{NW48t7P8-23tY8l-2}\eatline
-\nwidentdefs{\\{{\nwixident{direct-product-2}}{direct-product-2}}}\nwendcode{}\nwbegindocs{14}Maintenant, passons en CPS\footnote{La démonstration dans le Chazarain}:
+\nwidentdefs{\\{{\nwixident{direct-product-2}}{direct-product-2}}}\nwendcode{}\nwbegindocs{14}Maintenant, passons en CPS\footnote{La méthode d'obtention dans ~\cite{chazarain96}}:
 \nwenddocs{}\nwbegincode{15}\sublabel{NW48t7P8-23tY8l-3}\nwmargintag{{\nwtagstyle{}\subpageref{NW48t7P8-23tY8l-3}}}\moddef{list product~{\nwtagstyle{}\subpageref{NW48t7P8-23tY8l-1}}}\plusendmoddef\nwstartdeflinemarkup\nwprevnextdefs{NW48t7P8-23tY8l-2}{NW48t7P8-23tY8l-4}\nwenddeflinemarkup
 (define \nwlinkedidentc{cps-product}{NW48t7P8-23tY8l-3}
   (lambda(L k)
@@ -127,9 +127,9 @@ Voici un exemple calculant le produit des éléments d'une liste en style direct
 \nwindexdefn{\nwixident{cps-product}}{cps-product}{NW48t7P8-23tY8l-3}\eatline
 \nwidentdefs{\\{{\nwixident{cps-product}}{cps-product}}}\nwendcode{}\nwbegindocs{16}\nwdocspar
 L'utilisation de \texttt{cps-product} est en fait simple, il suffit d'utiliser la fonction identité:
-\nwenddocs{}\nwbegincode{17}\sublabel{NW48t7P8-16ZUSX-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW48t7P8-16ZUSX-1}}}\moddef{list product test~{\nwtagstyle{}\subpageref{NW48t7P8-16ZUSX-1}}}\endmoddef\nwstartdeflinemarkup\nwenddeflinemarkup
+\nwenddocs{}\nwbegincode{17}\sublabel{NW48t7P8-16ZUSX-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW48t7P8-16ZUSX-1}}}\moddef{list product test~{\nwtagstyle{}\subpageref{NW48t7P8-16ZUSX-1}}}\endmoddef\nwstartdeflinemarkup\nwprevnextdefs{\relax}{NW48t7P8-16ZUSX-2}\nwenddeflinemarkup
 (\nwlinkedidentc{cps-product}{NW48t7P8-23tY8l-3} '(12 6 0 35 42) (lambda(n) n))
-\nwnotused{list product test}\nwidentuses{\\{{\nwixident{cps-product}}{cps-product}}}\nwindexuse{\nwixident{cps-product}}{cps-product}{NW48t7P8-16ZUSX-1}\nwendcode{}\nwbegindocs{18}\nwdocspar
+\nwalsodefined{\\{NW48t7P8-16ZUSX-2}}\nwnotused{list product test}\nwidentuses{\\{{\nwixident{cps-product}}{cps-product}}}\nwindexuse{\nwixident{cps-product}}{cps-product}{NW48t7P8-16ZUSX-1}\nwendcode{}\nwbegindocs{18}\nwdocspar
 
 Pour les continuations vérifiant:
 \begin{equation}
@@ -146,12 +146,20 @@ on peut définir un \texttt{cps-product-0}:
       )
   ))
 \nwindexdefn{\nwixident{cps-product-0}}{cps-product-0}{NW48t7P8-23tY8l-4}\eatline
-\nwidentdefs{\\{{\nwixident{cps-product-0}}{cps-product-0}}}\nwidentuses{\\{{\nwixident{cps-product}}{cps-product}}}\nwindexuse{\nwixident{cps-product}}{cps-product}{NW48t7P8-23tY8l-4}\nwendcode{}\nwbegindocs{20}\part{annexes}
+\nwidentdefs{\\{{\nwixident{cps-product-0}}{cps-product-0}}}\nwidentuses{\\{{\nwixident{cps-product}}{cps-product}}}\nwindexuse{\nwixident{cps-product}}{cps-product}{NW48t7P8-23tY8l-4}\nwendcode{}\nwbegindocs{20}\nwdocspar
+Ici, l'avantage de la continuation est plus évident. Si nous voulons obtenir la somme de carré des éléments de la liste, on réécrit le précédent exemple ainsi :
+\nwenddocs{}\nwbegincode{21}\sublabel{NW48t7P8-16ZUSX-2}\nwmargintag{{\nwtagstyle{}\subpageref{NW48t7P8-16ZUSX-2}}}\moddef{list product test~{\nwtagstyle{}\subpageref{NW48t7P8-16ZUSX-1}}}\plusendmoddef\nwstartdeflinemarkup\nwprevnextdefs{NW48t7P8-16ZUSX-1}{\relax}\nwenddeflinemarkup
+;; avec les carré :
+(\nwlinkedidentc{cps-product}{NW48t7P8-23tY8l-3} '(12 6 0 35 42) (lambda(n) (* n n)))
+\nwidentuses{\\{{\nwixident{cps-product}}{cps-product}}}\nwindexuse{\nwixident{cps-product}}{cps-product}{NW48t7P8-16ZUSX-2}\nwendcode{}\nwbegindocs{22}\nwdocspar
+
+Bien qu'il soit dit en de nombreux ouvrages que la CPS pouvait rendre le code très difficile à écrire, lire et entretenir, on voit bien qu'ici on obtient une ouverture intéressante sur des possibilités inattendues comme une gestion d'erreur.
+\part{annexes}
 \section{fonctions utiles}
 
 \subsection{affichage console}
 Voici un \texttt{display} plus \emph{fun}:
-\nwenddocs{}\nwbegincode{21}\sublabel{NW48t7P8-9KoSl-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW48t7P8-9KoSl-1}}}\moddef{tools for scheme~{\nwtagstyle{}\subpageref{NW48t7P8-9KoSl-1}}}\endmoddef\nwstartdeflinemarkup\nwusesondefline{\\{NW48t7P8-3l3wO2-1}}\nwenddeflinemarkup
+\nwenddocs{}\nwbegincode{23}\sublabel{NW48t7P8-9KoSl-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW48t7P8-9KoSl-1}}}\moddef{tools for scheme~{\nwtagstyle{}\subpageref{NW48t7P8-9KoSl-1}}}\endmoddef\nwstartdeflinemarkup\nwusesondefline{\\{NW48t7P8-3l3wO2-1}}\nwenddeflinemarkup
 (define (\nwlinkedidentc{myprint}{NW48t7P8-9KoSl-1} . l)
   (for-each (lambda(e) (display e)) l))
 \nwindexdefn{\nwixident{myprint}}{myprint}{NW48t7P8-9KoSl-1}\eatline
@@ -162,7 +170,7 @@ Voici un \texttt{display} plus \emph{fun}:
 \nwixlogsorted{c}{{distance direct style}{NW48t7P8-1q4Jku-1}{\nwixd{NW48t7P8-1q4Jku-1}\nwixu{NW48t7P8-3l3wO2-1}}}%
 \nwixlogsorted{c}{{first-cps-test.scm}{NW48t7P8-3l3wO2-1}{\nwixd{NW48t7P8-3l3wO2-1}}}%
 \nwixlogsorted{c}{{list product}{NW48t7P8-23tY8l-1}{\nwixd{NW48t7P8-23tY8l-1}\nwixd{NW48t7P8-23tY8l-2}\nwixd{NW48t7P8-23tY8l-3}\nwixd{NW48t7P8-23tY8l-4}}}%
-\nwixlogsorted{c}{{list product test}{NW48t7P8-16ZUSX-1}{\nwixd{NW48t7P8-16ZUSX-1}}}%
+\nwixlogsorted{c}{{list product test}{NW48t7P8-16ZUSX-1}{\nwixd{NW48t7P8-16ZUSX-1}\nwixd{NW48t7P8-16ZUSX-2}}}%
 \nwixlogsorted{c}{{resultat first cps test}{NW48t7P8-3b3EwE-1}{\nwixd{NW48t7P8-3b3EwE-1}}}%
 \nwixlogsorted{c}{{tools for scheme}{NW48t7P8-9KoSl-1}{\nwixu{NW48t7P8-3l3wO2-1}\nwixd{NW48t7P8-9KoSl-1}}}%
 \nwixlogsorted{i}{{\nwixident{*-cps,}}{*-cps:com}}%
@@ -176,7 +184,7 @@ Voici un \texttt{display} plus \emph{fun}:
 \nwixlogsorted{i}{{\nwixident{distance-cps}}{distance-cps}}%
 \nwixlogsorted{i}{{\nwixident{myprint}}{myprint}}%
 \nwixlogsorted{i}{{\nwixident{sqrt-cps}}{sqrt-cps}}%
-\nwbegindocs{22}\nwdocspar
+\nwbegindocs{24}\nwdocspar
 
 \part{tables et index}
 \section{table des extraits de code}
@@ -192,6 +200,12 @@ Voici un \texttt{display} plus \emph{fun}:
 \end{multicols}
 
 \listofdefinitions
+
+\section{bibliographie}
+
+\bibliographystyle{plainnat}
+% \bibliographystyle{achicago}
+\bibliography{biblio/computing}
 
 \end{document}
 \nwenddocs{}

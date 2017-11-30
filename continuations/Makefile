@@ -3,6 +3,7 @@
 WEAVE = noweave
 TANGLE = notangle
 PDFLATEX = pdflatex
+BIBTEX = bibtex
 
 PROJECT = continuations
 
@@ -10,6 +11,8 @@ TARG_SRC = first-cps-test.scm
 TARG_PDF = $(PROJECT).pdf
 
 TEX_DEPS = common/newnoweb.sty common/prelude.tex
+
+BIBLIO = biblio/computing.bib
 
 SRC = $(PROJECT).nw
 MORENW = intro.nw annexes.nw nw/tables.nw
@@ -37,13 +40,14 @@ $(PROJECT).tex: $(ALLNW)
 
 	# rm -fv $(_tmpnw)
 
-$(PROJECT).pdf: $(PROJECT).tex  $(TEX_DEPS)
+$(PROJECT).pdf: $(PROJECT).tex  $(TEX_DEPS) $(BIBLIO)
 	$(PDFLATEX) $<
+	$(BIBTEX) $(PROJECT)
 	$(PDFLATEX) $<
 	$(PDFLATEX) $<
 
 clean:
-	rm -Rfv *.tex *.aux *.log *.out *.toc
+	rm -Rfv *.tex *.aux *.log *.out *.toc *.bbl *.blg *.brf
 	rm -Rfv $(TARG_SRC) $(TARG_PDF)
 
 .PHONY: all clean pdf code

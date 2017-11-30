@@ -13,4 +13,10 @@
 
 \listofdefinitions
 
+\section{bibliographie}
+
+\bibliographystyle{plainnat}
+% \bibliographystyle{achicago}
+\bibliography{biblio/computing}
+
 \end{document}
